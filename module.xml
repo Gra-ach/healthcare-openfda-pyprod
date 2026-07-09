@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+  <Document name="openfda-healthcare-pyprod.ZPM">
+    <Module>
+      <Name>openfda-healthcare-pyprod</Name>
+      <Version>0.1.0</Version>
+      <Description>A pure Python InterSystems IRIS interoperability production built with PyProd that integrates with the public openFDA Drug Adverse Event API. The production periodically retrieves adverse event reports, analyzes the data by calculating healthcare metrics such as serious event rate, average patient age, hospitalization and death counts, and the most frequently reported reaction, then persists both the source data and analytics into an IRIS SQL table. This project demonstrates how to implement custom inbound adapters, business services, business processes, and business operations entirely in Python using the PyProd framework.
+	  </Description>
+      <Author>
+        <Person>Iryna Mykhailova</Person>
+        <Organization>Igor Sikorsky Kyiv Polytechnic Institute</Organization>
+        <CopyrightDate>2026</CopyrightDate>
+        <License>MIT</License>
+      </Author>
+      <Packaging>module</Packaging>
+      <SystemRequirements Version=">=2024.1" Interoperability="enabled"/>
+      <Defaults>
+        <Parameter Name="ExtraPipFlags">--upgrade</Parameter>
+      </Defaults>
+      <Default Name="envSetup" Value="0"/>
+      <Default Name="fileWatcherRoot" Value="${libdir}/openfda-healthcare-pyprod"/>
+      <SourcesRoot>src</SourcesRoot>
+
+      <!-- Deploy Python source so it is importable as the openfda-healthcare-pyprod package -->
+      <FileCopy Name="src/openfda-healthcare-pyprod/" Target="${libdir}/openfda-healthcare-pyprod/"/>
+
+      <Resource Name="Setup.ProductionSetup.cls"/>
+
+      <!-- Run production setup after all resources are activated -->
+      <!-- Pass -DenvSetup=1 at install time to also run environment setup -->
+      <Invoke Class="Setup.ProductionSetup" Method="Setup" Phase="Activate" When="After" CheckStatus="true">
+        <Arg>${fileWatcherRoot}</Arg>
+        <Arg>${envSetup}</Arg>
+      </Invoke>
+      <Invoke Class="Setup.ProductionSetup" Method="StartProduction" CustomPhase="start" When="After"></Invoke>
+    </Module>
+  </Document>
+</Export>

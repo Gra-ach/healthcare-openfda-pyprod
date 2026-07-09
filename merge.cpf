@@ -1,0 +1,4 @@
+[Actions]
+CreateDatabase:Name=TEMP_DATA,Directory=/usr/irissys/mgr/TEMP_DATA,Resource=%DB_%DEFAULT
+CreateNamespace:Name=ENSEMBLE,Globals=TEMP_DATA,Routines=TEMP_DATA,Interop=1
+ModifyService:Name=%Service_CallIn,Enabled=1
