@@ -1804,3 +1804,7 @@ Starting IRIS
 20:01:35 2026-07-09 [INFO] IRIS^/usr/irissys^2026.1.0.234.1com^running, since Thu Jul  9 20:01:22 2026^iris.cpf^1972^52773^0^warn^IRIS^^^/usr/irissys^1972
 
 20:01:35 2026-07-09 [INFO] ...started InterSystems IRIS instance IRIS
+20:33:39 2026-07-09 [INFO] Shutting down InterSystems IRIS instance IRIS...
+20:33:46 2026-07-09 [INFO] IRIS^/usr/irissys^2026.1.0.234.1com^down, last used Thu Jul  9 20:33:44 2026^iris.cpf^1972^52773^0^^IRIS^^^/usr/irissys^1972
+
+20:33:46 2026-07-09 [INFO] ...shut down InterSystems IRIS instance IRIS
