@@ -57,19 +57,19 @@ class AdverseEventAnalysisMessage(JsonSerialize):
 class OpenFDAInboundAdapter(InboundAdapter):
     api_base_url: str = IRISProperty(
         description="openFDA Drug Adverse Event API URL",
-        settings="API Settings",
+        settings="API Settings"
     )
     result_limit: int = IRISProperty(
         description="Number of records to retrieve per poll",
-        settings="API Settings",
+        settings="API Settings"
     )
     api_key: str = IRISProperty(
         description="Optional openFDA API key",
-        settings="API Settings",
+        settings="API Settings"
     )
     payload_dir: str = IRISProperty(
         description="Directory where raw openFDA JSON payloads are saved",
-        settings="File Settings",
+        settings="File Settings"
     )
     medication_names: str = IRISProperty(
         description="Comma-separated medication names to rotate through",
@@ -132,7 +132,7 @@ class OpenFDAInboundAdapter(InboundAdapter):
                 payload_file.write(payload_bytes)
         except Exception as ex:
             IRISLog.Error(f"openFDA API call or payload write failed: {ex}")
-            return Status.Error()
+            return Status.Error(f"openFDA API call or payload write failed: {ex}")
 
         msg = AdverseEventFileMessage(
             api_url=url,
@@ -194,7 +194,7 @@ class OpenFDAAnalysisProcess(BusinessProcess):
             records = self._load_records(request.payload_file_path)
         except Exception as ex:
             IRISLog.Error(f"Failed to read openFDA payload file {request.payload_file_path}: {ex}")
-            return Status.Error()
+            return Status.Error(f"Failed to read openFDA payload file {request.payload_file_path}: {ex}")
 
         record_count = len(records)
         serious_count = 0
